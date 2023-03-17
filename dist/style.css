@@ -1,0 +1,36 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+#bridge-window{
+  background-color:#111111;
+  height: 100vh;
+  width: 100vw;
+}
+
+#control-panel{
+  display:flex;
+  flex-direction: column;
+  position:absolute;
+  left:calc( 50% - (75% / 2));
+  width: 75%;
+  height: 35%;
+  bottom: 20%;
+  background-color: #00ffff8d;
+
+  box-shadow: inset 0px -20px 50px 10px #00ffff80,
+  0px 0px 30px 6px #00ffff70;
+}
+
+#control-panel button{
+  color:white;
+  font-size: 4em;
+  background-color: #7cfefe8d;
+  min-width: 300px;
+  height: 100px;
+  width:20%;
+  box-shadow: inset 0px -20px 50px 10px #00b7ff80,
+  0px 0px 30px 6px #00b3ff70;
+}

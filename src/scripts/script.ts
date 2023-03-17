@@ -1,10 +1,11 @@
-console.log('test')
-
 //Management
+//export {GameObject,Player,Alien};
+
 class GameObject{
 player: Player = new Player(20,5,0.7);
 enemies: Alien[] = [];
 continue: boolean = true;
+
   createEnemies(num: number){
     for(let i =0 ; i < num ; i++){
       this.enemies.push(new Alien());
@@ -31,13 +32,17 @@ continue: boolean = true;
         console.log("player wins");
         this.enemies.pop();
         //Prompt to continue
-        this.continue = !window.confirm("Do you wish to retreat?")
+        //this.continue = !window.confirm("Do you wish to retreat?")
       } else {
         console.log("player lose");
         break;
       }
     }
   }
+
+  //Handle rounds with 1vs Many w/ targetting
+  resolveGroupBattle(){}
+  GroupBattle(){}
 }
 
 //ship
@@ -64,8 +69,15 @@ class Ship{
 
 //Player Ship
 class Player extends Ship{
+  missles:number = 0;
   constructor(...args : [number,number,number]){
     super(...args)
+  }
+  regenerateShields(amount: number){
+    this.hull += amount;
+  }
+  loadMissiles(amount: number){
+    this.missles += amount;
   }
 }
 
@@ -79,6 +91,15 @@ class Alien extends Ship{
   }
 }
 
-const game = new GameObject();
-game.createEnemies(6);
-game.battle()
+//combat instance
+// const game = new GameObject();
+// game.createEnemies(6);
+// game.battle()
+/*
+function defendEarth(){
+  const earthInvasion = new GameObject();
+  game.createEnemies(Math.floor(Math.random() * 10));
+  //battle
+  earthInvasion.battle();
+}
+*/

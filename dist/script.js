@@ -1,6 +1,6 @@
 "use strict";
-console.log('test');
 //Management
+//export {GameObject,Player,Alien};
 class GameObject {
     constructor() {
         this.player = new Player(20, 5, 0.7);
@@ -31,7 +31,7 @@ class GameObject {
                 console.log("player wins");
                 this.enemies.pop();
                 //Prompt to continue
-                this.continue = !window.confirm("Do you wish to retreat?");
+                //this.continue = !window.confirm("Do you wish to retreat?")
             }
             else {
                 console.log("player lose");
@@ -39,6 +39,9 @@ class GameObject {
             }
         }
     }
+    //Handle rounds with 1vs Many w/ targetting
+    resolveGroupBattle() { }
+    GroupBattle() { }
 }
 //ship
 class Ship {
@@ -63,6 +66,13 @@ class Ship {
 class Player extends Ship {
     constructor(...args) {
         super(...args);
+        this.missles = 0;
+    }
+    regenerateShields(amount) {
+        this.hull += amount;
+    }
+    loadMissiles(amount) {
+        this.missles += amount;
     }
 }
 //Alien Ship
@@ -74,6 +84,15 @@ class Alien extends Ship {
         super(hull, firepower, accuracy);
     }
 }
-const game = new GameObject();
-game.createEnemies(6);
-game.battle();
+//combat instance
+// const game = new GameObject();
+// game.createEnemies(6);
+// game.battle()
+/*
+function defendEarth(){
+  const earthInvasion = new GameObject();
+  game.createEnemies(Math.floor(Math.random() * 10));
+  //battle
+  earthInvasion.battle();
+}
+*/ 
