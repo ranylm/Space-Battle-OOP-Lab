@@ -5,32 +5,111 @@
 
 
 #bridge-window{
-  background-color:#111111;
+  background: linear-gradient(#031326, #031326, #072B59);
   height: 100vh;
   width: 100vw;
+  overflow:hidden;
+  perspective: 800px;
+  
+}
+enemy{
+  background-color: red;
+  height:100px;
+  width:200px;
+}
+
+#enemy-container{
+  padding:20px;
+  position:relative;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  width:80%;
+  left:calc( 50% - (80% / 2));  
+  height:40%;
+  background-color: blue;
+  gap:20px;
 }
 
 #control-panel{
   display:flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   position:absolute;
-  left:calc( 50% - (75% / 2));
+  left:calc( 50% - (75% / 2));  
   width: 75%;
-  height: 35%;
-  bottom: 20%;
+  height: 30%;
+  bottom: 5%;
+  perspective-origin: 50% 100px;
+
+  border-radius: 1rem;
   background-color: #00ffff8d;
+
+  transition: transform .5s;
+  transition-timing-function: ease-in;
 
   box-shadow: inset 0px -20px 50px 10px #00ffff80,
   0px 0px 30px 6px #00ffff70;
 }
 
 #control-panel button{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border:none;
   color:white;
   font-size: 4em;
   background-color: #7cfefe8d;
   min-width: 300px;
   height: 100px;
   width:20%;
+  border-radius: 1rem;
+
   box-shadow: inset 0px -20px 50px 10px #00b7ff80,
   0px 0px 30px 6px #00b3ff70;
+}
+#control-panel button:not(.button-disabled):hover{
+  background-color: #45f8f8f5;
+  box-shadow: inset 0px -20px 50px 10px #00b7ff80,
+  0px 0px 30px 6px #00b3ffbb;
+}
+
+#control-panel .button-disabled{
+  color:rgb(31, 30, 30);
+  box-shadow: inset 0px -20px 50px 10px #014b6880,
+  0px 0px 30px 6px #004c6d70;
+  background-color: #3d79798d;
+}
+
+.tiltUI{
+  transform: rotateX(30deg) translateZ(150px);
+}
+
+
+
+#combat-panel{
+  /* background-color: yellow;  */
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+stats{
+  /* background-color: red; */
+  height:100%;
+  width:20%;
+}
+console{
+  padding:10px; 
+  display: flex;
+  flex-direction: column-reverse;
+  width:80%;
+  overflow-wrap: normal;
+  overflow:hidden;
+  word-wrap: break-word;
+}
+console > p {
+  margin : 5px;
+  color:white;
 }

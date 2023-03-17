@@ -9,7 +9,7 @@ class GameObject {
     }
     createEnemies(num) {
         for (let i = 0; i < num; i++) {
-            this.enemies.push(new Alien());
+            this.enemies.push(new Alien(`Alien Ship ${i}`));
         }
     }
     //Resolve a battle, return victor
@@ -39,24 +39,30 @@ class GameObject {
             }
         }
     }
+    destroyShip(index) {
+        this.enemies.splice(index, 1);
+    }
     //Handle rounds with 1vs Many w/ targetting
     resolveGroupBattle() { }
     GroupBattle() { }
 }
 //ship
 class Ship {
-    constructor(hull, firepower, accuracy) {
+    constructor(hull, firepower, accuracy, name = "Alien Ship") {
         this.hull = 0;
         this.firepower = 0;
         this.accuracy = 0;
         this.hull = hull;
         this.firepower = firepower;
         this.accuracy = accuracy;
+        this.name = name;
     }
     attackShip(target) {
         if (Math.random() < this.accuracy) {
             target.hull -= this.firepower;
+            return `${this.name} hit the ${target.name} for ${this.firepower}!`;
         }
+        return `${this.name} has missed!`;
     }
     getStatus() {
         return { hull: this.hull, firepower: this.firepower, accuracy: this.accuracy };
@@ -65,7 +71,7 @@ class Ship {
 //Player Ship
 class Player extends Ship {
     constructor(...args) {
-        super(...args);
+        super(...args, "USS Assembley");
         this.missles = 0;
     }
     regenerateShields(amount) {
@@ -77,11 +83,11 @@ class Player extends Ship {
 }
 //Alien Ship
 class Alien extends Ship {
-    constructor() {
+    constructor(name) {
         let hull = 3 + Math.floor(Math.random() * 4);
         let firepower = 2 + Math.floor(Math.random() * 3);
         let accuracy = .6 + (Math.random() * .2);
-        super(hull, firepower, accuracy);
+        super(hull, firepower, accuracy, name);
     }
 }
 //combat instance
