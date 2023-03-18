@@ -3,6 +3,7 @@
 
 class GameObject{
 player: Player = new Player(20,5,0.7);
+points: number = 0 ;
 enemies: Alien[] = [];
 continue: boolean = true;
 
@@ -51,26 +52,37 @@ continue: boolean = true;
 //ship
 class Ship{
   name: string;
+  maxHull:number = 0;
   hull: number = 0;
+  maxShields:number = 10;
+  shields: number = 10;
   firepower: number = 0;
   accuracy: number = 0 ;
   constructor(hull:number , firepower:number, accuracy: number,name:string = "Alien Ship"){
+    this.maxHull = hull;
     this.hull = hull;
     this.firepower = firepower;
     this.accuracy = accuracy;
     this.name = name;
   }
 
-  attackShip(target: Ship){
+  attackShip(target: Ship): string{
     if (Math.random() < this.accuracy) {
-      target.hull -= this.firepower;
+      target.takeDamage(this.firepower);
       return `${this.name} hit the ${target.name} for ${this.firepower}!`
     }
     return `${this.name} has missed!`
   }
 
+  takeDamage(damage:number){
+    this.hull-=damage;
+  }
+
   getStatus(){
-    return {hull:this.hull, firepower:this.firepower, accuracy:this.accuracy}
+    return {maxHull:this.maxHull, hull:this.hull,
+            maxShields:this.maxShields, shields:this.shields,
+            firepower:this.firepower, accuracy:this.accuracy
+            }
   }
 }
 
@@ -80,8 +92,17 @@ class Player extends Ship{
   constructor(...args : [number,number,number]){
     super(...args,"USS Assembley")
   }
+
+  takeDamage(damage: number): void {
+      this.shields = this.shields - damage;
+      if(this.shields < 0){
+        super.takeDamage(Math.abs(this.shields));
+        this.shields = 0;
+      }
+  }
   regenerateShields(amount: number){
-    this.hull += amount;
+    this.shields += amount;
+    if(this.shields > this.maxShields) this.shields = this.maxShields;
   }
   loadMissiles(amount: number){
     this.missles += amount;
@@ -90,10 +111,10 @@ class Player extends Ship{
 
 //Alien Ship
 class Alien extends Ship{
-  constructor(name){
+  constructor(name:string){
     let hull:number = 3 + Math.floor(Math.random() * 4);
     let firepower:number = 2 + Math.floor(Math.random() * 3);
-    let accuracy:number = .6 + ( Math.random() * .2 );
+    let accuracy:number = .2 + ( Math.random() * .2 );
     super(hull, firepower, accuracy,name);
   }
 }

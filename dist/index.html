@@ -15,13 +15,27 @@
     </div>
     <div id="control-panel">
       <div id="combat-panel">
-        <stats></stats>
+        <div class="flex-container">
+        <score><span>0</span></score>
+        <stats>
+          <!-- <missles></missles> -->
+            <shields></shields>
+            <hull></hull>
+        </stats>
+        </div>
         <console></console>
       </div>
       <button id="start-button">Start</button>
       <button id="attack-button" class="button-disabled">Attack</button>
       <button id="retreat-button"class="button-disabled">Retreat</button>
     </div>
+  </div>
+  <div id="end-screen">
+    <div id="restart-prompt">
+      <span>Restart?</span>
+      <button>Continue</button>
+    </div>
+  </div>
   </div>
 
 </body>

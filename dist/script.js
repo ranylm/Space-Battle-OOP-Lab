@@ -4,6 +4,7 @@
 class GameObject {
     constructor() {
         this.player = new Player(20, 5, 0.7);
+        this.points = 0;
         this.enemies = [];
         this.continue = true;
     }
@@ -49,9 +50,13 @@ class GameObject {
 //ship
 class Ship {
     constructor(hull, firepower, accuracy, name = "Alien Ship") {
+        this.maxHull = 0;
         this.hull = 0;
+        this.maxShields = 10;
+        this.shields = 10;
         this.firepower = 0;
         this.accuracy = 0;
+        this.maxHull = hull;
         this.hull = hull;
         this.firepower = firepower;
         this.accuracy = accuracy;
@@ -59,13 +64,19 @@ class Ship {
     }
     attackShip(target) {
         if (Math.random() < this.accuracy) {
-            target.hull -= this.firepower;
+            target.takeDamage(this.firepower);
             return `${this.name} hit the ${target.name} for ${this.firepower}!`;
         }
         return `${this.name} has missed!`;
     }
+    takeDamage(damage) {
+        this.hull -= damage;
+    }
     getStatus() {
-        return { hull: this.hull, firepower: this.firepower, accuracy: this.accuracy };
+        return { maxHull: this.maxHull, hull: this.hull,
+            maxShields: this.maxShields, shields: this.shields,
+            firepower: this.firepower, accuracy: this.accuracy
+        };
     }
 }
 //Player Ship
@@ -74,8 +85,17 @@ class Player extends Ship {
         super(...args, "USS Assembley");
         this.missles = 0;
     }
+    takeDamage(damage) {
+        this.shields = this.shields - damage;
+        if (this.shields < 0) {
+            super.takeDamage(Math.abs(this.shields));
+            this.shields = 0;
+        }
+    }
     regenerateShields(amount) {
-        this.hull += amount;
+        this.shields += amount;
+        if (this.shields > this.maxShields)
+            this.shields = this.maxShields;
     }
     loadMissiles(amount) {
         this.missles += amount;
@@ -86,7 +106,7 @@ class Alien extends Ship {
     constructor(name) {
         let hull = 3 + Math.floor(Math.random() * 4);
         let firepower = 2 + Math.floor(Math.random() * 3);
-        let accuracy = .6 + (Math.random() * .2);
+        let accuracy = .2 + (Math.random() * .2);
         super(hull, firepower, accuracy, name);
     }
 }
