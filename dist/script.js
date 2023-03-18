@@ -106,7 +106,7 @@ class Alien extends Ship {
     constructor(name) {
         let hull = 3 + Math.floor(Math.random() * 4);
         let firepower = 2 + Math.floor(Math.random() * 3);
-        let accuracy = .2 + (Math.random() * .2);
+        let accuracy = .3 + (Math.random() * .2);
         super(hull, firepower, accuracy, name);
     }
 }
