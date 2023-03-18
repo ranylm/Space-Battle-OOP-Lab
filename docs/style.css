@@ -1,0 +1,221 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.flex-container{
+  display:flex;
+  height:100%;
+  width:20%;
+  flex-direction: column-reverse;
+}
+#bridge-window{
+  background: linear-gradient(#031326, #031326, #072B59);
+  height: 100vh;
+  width: 100vw;
+  overflow:hidden;
+  perspective: 800px;
+  
+  transition: opacity .5s;
+  transition-timing-function: ease-in;
+}
+
+enemy{
+  color:white;
+  overflow: visible;
+  font-size: 8rem;
+  /* background-color: red; */
+  height:100px;
+  width:200px;
+}
+
+enemy::after{
+content:"🛸";
+}
+
+#enemy-container{
+  padding:20px;
+  position:relative;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  width:80%;
+  left:calc( 50% - (80% / 2));  
+  height:40%;
+  /* background-color: blue; */
+  gap:20px;
+}
+
+#control-panel{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position:absolute;
+  left:calc( 50% - (75% / 2));  
+  width: 75%;
+  height: 30%;
+  bottom: 5%;
+  perspective-origin: 50% 100px;
+
+  border-radius: 1rem;
+  background-color: #00ffff8d;
+
+  transition: transform .5s;
+  transition-timing-function: ease-in;
+
+  box-shadow: inset 0px -20px 50px 10px #00ffff80,
+  0px 0px 30px 6px #00ffff70;
+}
+
+#control-panel button{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border:none;
+  color:white;
+  font-size: 4em;
+  background-color: #7cfefe8d;
+  min-width: 300px;
+  height: 100px;
+  width:20%;
+  border-radius: 1rem;
+
+  box-shadow: inset 0px -20px 50px 10px #00b7ff80,
+  0px 0px 30px 6px #00b3ff70;
+}
+#control-panel button:not(.button-disabled):hover{
+  background-color: #45f8f8f5;
+  box-shadow: inset 0px -20px 50px 10px #00b7ff80,
+  0px 0px 30px 6px #00b3ffbb;
+}
+
+#control-panel .button-disabled{
+  color:rgb(31, 30, 30);
+  box-shadow: inset 0px -20px 50px 10px #014b6880,
+  0px 0px 30px 6px #004c6d70;
+  background-color: #3d79798d;
+}
+
+.tiltUI{
+  transform: rotateX(30deg) translateZ(150px);
+}
+
+
+
+#combat-panel{
+  /* background-color: yellow;  */
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+score{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  /* background-color: red; */
+  text-align: center;
+  vertical-align:text-bottom;
+  line-height: 100%;
+}
+score span{
+  color: white;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 5px rgb(245, 255, 254), 0 0 5em rgb(252, 252, 252), 0 0 5rem blue; 
+}
+stats{
+  /* background-color: red; */
+  padding: 10px;
+  height:calc(80% - 20px);
+  width:100%;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 5px;
+
+  transform: rotate(180deg);
+}
+stats > *{
+  width: 1fr;
+  height:100%;
+  border: rgba(236, 236, 236, 0.726) solid 2px;
+}
+hull{
+  background-color: green;
+}
+shields{
+  background-color: rgb(0, 153, 255);
+}
+missles{
+  background-color: rgb(255, 0, 0);
+}
+console{
+  padding:10px; 
+  display: flex;
+  flex-direction: column-reverse;
+  width:80%;
+  overflow-wrap: normal;
+  overflow:hidden;
+  word-wrap: break-word;
+}
+console > p {
+  margin : 5px;
+  color:white;
+}
+
+@keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 100;}
+}
+#end-screen{
+  display:none;
+  position: absolute;
+  top:0;
+  left:0;
+  height:100vh;
+  width: 100vw;
+  background-color: white;
+  opacity:100;
+  align-items: center;
+  justify-content: center;
+
+  /* transition: opacity 1s;
+  transition-timing-function: ease-in; */
+
+  z-index: 1000;
+
+  animation-name: fadein;
+  animation-duration: 1s;
+}
+@keyframes popin {
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 0;
+  }
+  100% {opacity: 100;}
+}
+#restart-prompt{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: inset 0px -20px 50px 10px #00ffff80,
+  0px 0px 30px 6px #00ffff70;
+
+  width:500px;
+  height: 200px;
+  animation-name: popin;
+  animation-duration: 2s;
+}
+
+#restart-prompt span{
+  font-size: 3rem;
+}
+#restart-prompt button{
+  font-size: 2rem;
+  height:3rem;
+  width:40%;
+}

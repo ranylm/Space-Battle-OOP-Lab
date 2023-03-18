@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="script.js" ></script>
+  <script defer src="UI.js" ></script>
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="bridge-window">  
+    <div id="enemy-container">
+    </div>
+    <div id="control-panel">
+      <div id="combat-panel">
+        <div class="flex-container">
+        <score><span>0</span></score>
+        <stats>
+          <!-- <missles></missles> -->
+            <shields></shields>
+            <hull></hull>
+        </stats>
+        </div>
+        <console></console>
+      </div>
+      <button id="start-button">Start</button>
+      <button id="attack-button" class="button-disabled">Attack</button>
+      <button id="retreat-button"class="button-disabled">Retreat</button>
+    </div>
+  </div>
+  <div id="end-screen">
+    <div id="restart-prompt">
+      <span>Restart?</span>
+      <button>Continue</button>
+    </div>
+  </div>
+  </div>
+
+</body>
+</html>
